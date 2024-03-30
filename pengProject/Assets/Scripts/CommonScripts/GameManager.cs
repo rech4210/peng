@@ -1,34 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Numerics;
-using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEngine.EventSystems.EventTrigger;
+using KMS.Struct;
 
-public struct Golds
+namespace KMS.Singleton
 {
-    public int bingneral;
-    public int energy;
-    public int emperorCoin;
-    public Golds(int bingneral, int energy, int emperorCoin)
+    public class GameManager : MonoBehaviour
     {
-        this.bingneral = bingneral;
-        this.energy = energy;
-        this.emperorCoin = emperorCoin;
-    }
-};
+        Resource resource;
 
-public class GameManager : MonoBehaviour
-{
-    Golds golds;
-    public static GameManager instance;
-    public int bingneral {  get {return golds.bingneral ; } set { golds.bingneral += value; } }
-    public int energy { get { return golds.energy; } set { golds.energy += value; } }
-    public int emperorCoin { get { return golds.emperorCoin; } set { golds.emperorCoin += value; } }
+        private float penguinBingneral = 0;
+        private float penguinEnergy = 0;
 
-    void Start()
-    {
-        instance = this;
-        golds = new Golds(0, 0, 0);
+
+
+        public static GameManager instance;
+        public int bingneral { get { return resource.bingneral; } set { resource.bingneral += value; } }
+        public int energy { get { return resource.energy; } set { resource.energy += value; } }
+        public int emperorCoin { get { return resource.emperorCoin; } set { resource.emperorCoin += value; } }
+
+        void Start()
+        {
+            instance = this;
+            resource = new Resource(0, 0, 0);
+        }
+
+
+        public Resource GetPenguinResource()
+        {
+            return resource;
+        }
     }
 }
