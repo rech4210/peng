@@ -1,0 +1,20 @@
+Using pre-set license
+Built from '2022.3/release' branch; Version is '2022.3.18f1 (d29bea25151d) revision 13802474'; Using compiler version '192829333'; Build Type 'Release'
+OS: 'Windows 10  (10.0.19045) 64bit Core' Language: 'ko' Physical Memory: 16265 MB
+received signal from system: SIGSEGV
+Obtained 14 stack frames
+RtlLookupFunctionEntry returned NULL function. Aborting stack walk.
+0x00007ff7d61e83dd (Unity) StackWalker::GetCurrentCallstack
+0x00007ff7d61ed4a9 (Unity) StackWalker::ShowCallstack
+0x00007ff7d71c0021 (Unity) GetStacktrace
+0x00007ff7d61ec8f6 (Unity) winutils::PrintStackTrace
+0x00007ff7d61e7c0c (Unity) winutils::CrashHandler::DefaultSignalHandler
+0x00007ff7d8604858 (Unity) seh_filter_exe
+0x00007ff7d86cbe18 (Unity) `__scrt_common_main_seh'::`1'::filt$0
+0x00007ff7d85ce1f0 (Unity) _C_specific_handler
+0x00007ffbca9d23af (ntdll) _chkstk
+0x00007ffbca9814b4 (ntdll) RtlRaiseException
+0x00007ffbca9d0ebe (ntdll) KiUserExceptionDispatcher
+0x00007ff7d757b217 (Unity) WorkerLicense::HasEntitlement
+<Missing stacktrace information>
+
