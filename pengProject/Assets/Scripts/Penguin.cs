@@ -2,14 +2,14 @@ using UnityEngine;
 using KMS.Enum;
 using KMS.Singleton;
 using KMS.Struct;
+using System.Collections;
 
 
-namespace KMS.Penguin
+namespace KMS.Worker
 {
-    public class Penguin : MonoBehaviour
+    public class Penguin : Workers
     {
-        PenguinState state;
-
+        
         // 이 부분은 스크립터블 오브젝트로 관리하는게 맞을듯?
         private Resource penguinResource = new();
         public Resource PenguinResource { get { return penguinResource = GameManager.instance.GetPenguinResource(); }}
@@ -19,16 +19,34 @@ namespace KMS.Penguin
         int consumeEnergyPoint = -1;
 
         bool isMove = true;
-
         Vector3 targetPos;
 
-        private void Update()
-        {
-        }
 
-        private void FixedUpdate()
+        #region 펭귄 애니메이션 =====================
+        public Animator animator;
+        PenguinState currentState;
+        PenguinState laterState;
+
+        public void ChangePenguinState(PenguinState state)
         {
-            PenguinState(state);
+            switch (state)
+            {
+                case Enum.PenguinState.Pacing:
+                    currentState = Enum.PenguinState.Pacing;
+                    break;
+                case Enum.PenguinState.Working:
+                    currentState = Enum.PenguinState.Working;
+                    break;
+                case Enum.PenguinState.DozeOff:
+                    currentState = Enum.PenguinState.DozeOff;
+                    break;
+                case Enum.PenguinState.Resting:
+                    currentState = Enum.PenguinState.Resting;
+                    break;
+                case Enum.PenguinState.Eating:
+                    currentState = Enum.PenguinState.Eating;
+                    break;
+            }
         }
 
         public void PenguinState(PenguinState penguinState)
@@ -53,6 +71,21 @@ namespace KMS.Penguin
             }
         }
 
+        #endregion
+        private void Update()
+        {
+        }
+
+        private void FixedUpdate()
+        {
+            if (currentState == laterState)
+            {
+                return;
+            }
+            PenguinState(currentState);
+        }
+        
+
         void Pacing()
         {
             if (isMove)
@@ -63,27 +96,25 @@ namespace KMS.Penguin
         }
         void Working()
         {
-            //if(GameManager.instance.energy > 0f)
-            //{
-            //do animation
-            GameManager.instance.bingneral = bingneralCount;
-            GameManager.instance.energy = consumeEnergyPoint;
-            //}
-            //else
-            //{
-            //    // need more energy
-            //}
+            animator.SetBool("working", true);
+
+            // 이부분 함수 제어 어떻게 할것인지
+            StartCoroutine(WorkingCorutine(3f));
+        }
+
+        IEnumerator WorkingCorutine(float waitTime)
+        {
+            GameManager.instance.SetPenguinResource(bingneralCount,0);
+            //GameManager.instance.Energy += consumeEnergyPoint;
+            yield return new WaitForSeconds(waitTime);
         }
         void DozeOff()
         {
+            animator.SetBool("dozeoff", true);
             //do animation
             //when in mine... wake up
         }
 
-
-        // 펭귄이 아닌 전체 로직으로
-        //GameManager.instance.bingneral -= bingneral;
-        //GameManager.instance.energy += energyPoint;
         void Resting()
         {
             // do sleep animation

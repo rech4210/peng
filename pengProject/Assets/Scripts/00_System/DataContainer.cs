@@ -1,3 +1,5 @@
+using System;
+
 namespace KMS.Enum
 {
     public enum PenguinState
@@ -13,6 +15,7 @@ namespace KMS.Enum
 
 namespace KMS.Struct
 {
+    [Serializable]
     public struct Resource
     {
         public int bingneral;
