@@ -6,6 +6,7 @@ namespace KMS.Singleton
 {
     public abstract class Manager<T> : MonoBehaviour where T : Manager<T>
     {
+        
         private T instance;
         public T Instance
         {

@@ -1,7 +1,9 @@
+using KMS.Struct;
 using System;
 
 namespace KMS.Enum
 {
+    [System.Serializable]
     public enum PenguinState
     {
         Pacing,
@@ -11,6 +13,25 @@ namespace KMS.Enum
         Eating
     }
 
+}
+
+namespace KMS.Class
+{
+    [System.Serializable]
+    public class WorkerSpec
+    {
+        public float miningDuration;
+        public float miningPoint;
+        public Resource spawnCost;
+        public Resource upgradeCost;
+        public WorkerSpec(float duration, float point, Resource spwnCost, Resource upCost)
+        {
+            miningDuration = duration;
+            miningPoint = point;
+            spawnCost = spwnCost;
+            upgradeCost = upCost;
+        }
+    }
 }
 
 namespace KMS.Struct

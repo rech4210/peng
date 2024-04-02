@@ -1,22 +1,17 @@
 using UnityEngine;
 using KMS.Enum;
 using KMS.Singleton;
-using KMS.Struct;
 using System.Collections;
-
 
 namespace KMS.Worker
 {
     public class Penguin : Workers
     {
-        
         // 이 부분은 스크립터블 오브젝트로 관리하는게 맞을듯?
-        private Resource penguinResource = new();
-        public Resource PenguinResource { get { return penguinResource = GameManager.instance.GetPenguinResource(); }}
 
-        float speed = 1f;
+        //float speed = 1f;
         int bingneralCount = 5;
-        int consumeEnergyPoint = -1;
+        //int consumeEnergyPoint = -1;
 
         bool isMove = true;
         Vector3 targetPos;
@@ -72,9 +67,6 @@ namespace KMS.Worker
         }
 
         #endregion
-        private void Update()
-        {
-        }
 
         private void FixedUpdate()
         {
@@ -99,7 +91,7 @@ namespace KMS.Worker
             animator.SetBool("working", true);
 
             // 이부분 함수 제어 어떻게 할것인지
-            StartCoroutine(WorkingCorutine(3f));
+            StartCoroutine(WorkingCorutine(workerSpec.miningDuration));
         }
 
         IEnumerator WorkingCorutine(float waitTime)
