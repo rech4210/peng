@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIMainContext : MasterContext
+public class MainViewModel : MonoBehaviour
 {
     //public static string contextName => "Master name";
     //public static string contextHeader = "Master Header";

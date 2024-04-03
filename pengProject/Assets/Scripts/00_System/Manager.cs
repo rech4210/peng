@@ -8,7 +8,7 @@ namespace KMS.Singleton
     {
         
         private T instance;
-        public T Instance
+        public T Instanced
         {
             get 
             {
